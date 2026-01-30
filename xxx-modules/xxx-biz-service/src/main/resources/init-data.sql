@@ -1,0 +1,6 @@
+INSERT INTO user (id, type, type2, telegram_id, chain_id, chain_address, email, twitter_id, phone_number, username, receive_messages_telegram_ids, salt, password, withdrawal_password, app_key, referrer_id, is_enabled, is_test, avatar_url, referral_code, total_bet_amount, vip_level, version, create_ts)
+VALUES (1, 1, 91, null, null, null, '605869919@qq.com', null, null, 'admin', null, 'xDazsKvx2QmiMFQEZSkdLQ==', '0ym8/18d3pIZ9HoDzm07J4PMKKijMvVFY3Q6aiswF1c=', null, null, null, 1, 0, null, 'gss76ssf', 0.00, 0, 2, '2025-07-18 18:28:14');
+
+INSERT INTO six.user_preference (id, is_winning_popup, style_theme, base_currency_id, quote_currency_id, language, participate_deposit_rollover, participate_deposit_rollover_config_id, hide_game_profile, hide_username, reject_stranger_notification, top_profit_notification, receive_deposit_email, receive_withdraw_email, receive_promotion_email, create_ts,
+                                 update_ts)
+VALUES (1, 1, 1, 1, 1, 'en-US', 1, null, 0, 0, 1, 1, 1, 1, 1, '2025-10-29 11:34:17', '2025-10-29 11:34:18');

@@ -1,0 +1,29 @@
+{
+  "groups": [
+    {
+      "name": "framework.captcha",
+      "type": "com.xxx.captcha.configuration.properties.CaptchaProperties",
+      "sourceType": "com.xxx.captcha.configuration.properties.CaptchaProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "framework.captcha.enabled",
+      "type": "java.lang.Boolean",
+      "description": "是否启用",
+      "sourceType": "com.xxx.framework.jwt.configuration.properties.JWTProperties"
+    },
+    {
+      "name": "framework.captcha.type",
+      "type": "java.lang.String",
+      "description": "类型: math=数值计算; char=字符",
+      "sourceType": "com.xxx.framework.jwt.configuration.properties.JWTProperties",
+      "defaultValue": "com.xxx"
+    },
+  ]
+}
+
+
+
+
+

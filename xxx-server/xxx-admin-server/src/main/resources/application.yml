@@ -1,0 +1,161 @@
+server:
+  port: 30061
+  servlet:
+    context-path: /api
+  compression:
+    enabled: true
+    mime-types: text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json,application/xml
+    min-response-size: 1024 # 仅压缩大于1KB的响应
+
+spring:
+  application:
+    name: %artifactId%
+  main:
+    web-application-type: servlet
+  profiles:
+    active: %mvn.spring.profile%
+  cloud:
+    nacos:
+      server-addr: %mvn.nacos.server-addr%
+      discovery:
+        server-addr: ${spring.cloud.nacos.server-addr}
+        namespace: %mvn.nacos.namespace%
+        group: %mvn.service.group%
+  servlet:
+    multipart:
+      max-file-size: 6MB
+      max-request-size: 20MB
+  data:
+    redis:
+      database: 6
+      timeout: 10000ms
+      lettuce:
+        pool:
+          max-active: 8         # 连接池最大连接数
+          max-idle: 4           # 连接池最大空闲连接数
+          min-idle: 2           # 连接池最小空闲连接数
+          max-wait: 3000ms      # 连接池最大阻塞等待时间
+        shutdown-timeout: 100ms
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      cors:
+        allowed-origins: "*"
+        allowed-methods: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+dubbo:
+  application:
+    id: ${spring.application.name}
+    serialize-check-status: DISABLE
+    auto-trust-serialize-class: true
+    trust-serialize-class-level: 3
+    qos-enable: false
+  protocol:
+    port: 30066
+    name: dubbo
+    payload: 268435456
+  scan:
+    base-packages: com.xxx.**.provider
+  registry:
+    address: nacos://${spring.cloud.nacos.server-addr}
+    group: ${spring.cloud.nacos.discovery.group}
+    timeout: 1200000
+  provider:
+    group: ${spring.cloud.nacos.discovery.group}
+    timeout: 1200000
+  consumer:
+    group: ${spring.cloud.nacos.discovery.group}
+    check: false
+    timeout: 1200000
+    provider-namespace: %mvn.nacos.namespace%
+  config-center:
+    namespace: %mvn.nacos.namespace%
+
+logging:
+  level:
+    com: warn
+    io: warn
+    reactor: warn
+    org: warn
+
+framework:
+  jwt:
+    secret: MuEWrnY879
+    token-valid-duration: 720
+    token-refresh-expire: 360
+    user-id-claim-key: sys_user_id
+  captcha:
+    enabled: true
+    type: math
+---
+spring:
+  config:
+    activate:
+      on-profile: dev-local-africa
+  data:
+    redis:
+      database: 6
+      host: 127.0.0.1
+      password: zse45tfv
+logging:
+  level:
+    root: debug
+---
+spring:
+  config:
+    activate:
+      on-profile: dev-local-hb
+  data:
+    redis:
+      database: 6
+      host: 127.0.0.1
+      password: zse45tfv
+logging:
+  level:
+    root: debug
+---
+spring:
+  config:
+    activate:
+      on-profile: prod-translate-hb
+  data:
+    redis:
+      database: 6
+      cluster:
+        nodes:
+          - hb-redis-dhefru.serverless.apse1.cache.amazonaws.com:6380
+      username: hb-redis
+      password: Six!@#321_hb_redis
+      ssl:
+        enabled: true
+      lettuce:
+        cluster:
+          refresh:
+            adaptive: true
+            period: 30s
+---
+spring:
+  config:
+    activate:
+      on-profile: prod-translate-africa
+  data:
+    redis:
+      database: 6
+      cluster:
+        nodes:
+          - hb-redis-dhefru.serverless.apse1.cache.amazonaws.com:6380
+      username: hb-redis
+      password: Six!@#321_hb_redis
+      ssl:
+        enabled: true
+      lettuce:
+        cluster:
+          refresh:
+            adaptive: true
+            period: 30s

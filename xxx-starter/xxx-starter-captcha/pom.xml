@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.six</groupId>
+        <artifactId>translate-starter</artifactId>
+        <version>translate-1.2.1-SNAPSHOT</version>
+    </parent>
+    <artifactId>translate-starter-captcha</artifactId>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>com.six</groupId>
+            <artifactId>translate-starter-redis</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- 第三方 -->
+
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>pro.fessional</groupId>
+            <artifactId>kaptcha</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.servlet</groupId>
+                    <artifactId>javax.servlet-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+    </dependencies>
+
+</project>

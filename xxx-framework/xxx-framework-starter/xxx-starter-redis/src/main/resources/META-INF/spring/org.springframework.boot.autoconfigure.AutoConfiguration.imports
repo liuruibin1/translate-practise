@@ -1,0 +1,2 @@
+com.xxx.framework.redis.configuration.RedisConfig
+com.xxx.framework.redis.service.RedisService

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.six</groupId>
+        <artifactId>translate-modules</artifactId>
+        <version>translate-1.2.1-SNAPSHOT</version>
+    </parent>
+    <artifactId>translate-chain-adapter</artifactId>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>com.six</groupId>
+            <artifactId>translate-common-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- 第三方 -->
+
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.web3j</groupId>
+            <artifactId>core</artifactId>
+            <version>4.9.8</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.neodix42</groupId>
+            <artifactId>smartcontract</artifactId>
+            <version>0.9.9</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.neodix42</groupId>
+            <artifactId>ton4j</artifactId>
+            <version>0.9.9</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.tronprotocol</groupId>
+            <artifactId>trident</artifactId>
+            <version>0.10.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba.fastjson2</groupId>
+            <artifactId>fastjson2</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+        </dependency>
+
+        <!--        <dependency>-->
+<!--            <groupId>org.apache.commons</groupId>-->
+<!--            <artifactId>commons-math3</artifactId>-->
+<!--            <version>3.6.1</version>-->
+<!--            <scope>compile</scope>-->
+<!--        </dependency>-->
+
+    </dependencies>
+
+</project>

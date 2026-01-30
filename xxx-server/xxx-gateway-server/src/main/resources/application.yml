@@ -1,0 +1,286 @@
+server:
+  port: 30001
+  servlet:
+    context-path: /api
+
+spring:
+  application:
+    name: %artifactId%
+  profiles:
+    active: %mvn.spring.profile%
+  cloud:
+    nacos:
+      server-addr: %mvn.nacos.server-addr%
+      discovery:
+        server-addr: ${spring.cloud.nacos.server-addr}
+        namespace: %mvn.nacos.namespace%
+        group: %mvn.service.group%
+    gateway:
+      discovery:
+        locator:
+          lowerCaseServiceId: true
+          enabled: true
+      globalcors:
+        add-to-simple-url-handler-mapping: true
+        cors-configurations:
+          '[/**]':
+            allowedOriginPatterns: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+            allowCredentials: true
+      routes:
+        - id: local-endpoints
+          uri: http://localhost:${server.port}
+          predicates:
+            - Path=${server.servlet.context-path}/base/**
+          filters:
+            - CacheRequestFilter
+            - StripPrefix=1
+        - id: translate-frontend-server
+          uri: lb://translate-frontend-server
+          predicates:
+            - Path=${server.servlet.context-path}/auth/**,${server.servlet.context-path}/user/**,${server.servlet.context-path}/game/**,${server.servlet.context-path}/rollover/**,${server.servlet.context-path}/currency/**,${server.servlet.context-path}/open/**,${server.servlet.context-path}/chain/**,${server.servlet.context-path}/notification/**,${server.servlet.context-path}/rama/**,${server.servlet.context-path}/twitter/**,${server.servlet.context-path}/test/**
+          filters:
+            - CacheRequestFilter
+            - StripPrefix=1
+        - id: translate-frontend-ws
+          uri: lb:ws://translate-frontend-ws
+          predicates:
+            - Path=${server.servlet.context-path}/ws/**
+          filters:
+            - StripPrefix=1
+        - id: translate-frontend-ws-wss
+          uri: lb:wss://translate-frontend-ws
+          predicates:
+            - Path=${server.servlet.context-path}/ws/**
+          filters:
+            - StripPrefix=1
+  data:
+    redis:
+      database: 6
+      timeout: 10000ms
+      lettuce:
+        pool:
+          max-active: 8         # 连接池最大连接数
+          max-idle: 4           # 连接池最大空闲连接数
+          min-idle: 2           # 连接池最小空闲连接数
+          max-wait: 3000ms      # 连接池最大阻塞等待时间
+        shutdown-timeout: 100ms
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      cors:
+        allowed-origins: "*"
+        allowed-methods: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+dubbo:
+  application:
+    id: ${spring.application.name}
+    serialize-check-status: DISABLE
+    auto-trust-serialize-class: true
+    trust-serialize-class-level: 3
+    qos-enable: false
+  protocol:
+    port: 30006
+    name: dubbo
+    payload: 268435456
+  scan:
+    base-packages: com.xxx.**.provider
+  registry:
+    address: nacos://${spring.cloud.nacos.server-addr}
+    group: ${spring.cloud.nacos.discovery.group}
+    timeout: 1200000
+  provider:
+    group: ${spring.cloud.nacos.discovery.group}
+    timeout: 1200000
+  consumer:
+    group: ${spring.cloud.nacos.discovery.group}
+    check: false
+    timeout: 1200000
+    provider-namespace: %mvn.nacos.namespace%
+  config-center:
+    namespace: %mvn.nacos.namespace%
+
+logging:
+  level:
+    com: warn
+    io: warn
+    reactor: warn
+    org: warn
+
+framework:
+  jwt:
+    secret: vmi9_8mBnA
+    token-valid-duration: 10080
+    token-refresh-expire: 720
+    user-id-claim-key: user_id
+application:
+  #  xss:
+  #    enabled: true
+  #    exclude-urls:
+  #      - /system/notice
+  gateway:
+    #不进行token拦截
+    allowed-urls:
+      - /api/test
+      - /api/base
+      - /api/stats
+      - /api/ws
+
+      - /api/auth/sign-up
+
+      - /api/auth/login
+      - /api/auth/login-via-crypto-account
+      - /api/auth/login-via-telegram
+      - /api/auth/login-via-telegram-mini-app
+      - /api/auth/login-via-google
+      - /api/auth/obtain-twitter-url
+      - /api/auth/login-via-twitter
+      - /api/auth/obtain-facebook-state
+      - /api/auth/login-via-facebook
+      - /api/auth/obtain-line-url
+      - /api/auth/login-via-line
+
+      - /api/user/username-is-exists
+      - /api/user/obtain-username
+      - /api/user/info
+
+      - /api/currency/list
+      - /api/currency/list-deposit
+      - /api/currency/list-withdraw
+      -
+      - /api/currency/currency-price/queryCurrencyPrice
+      - /api/currency/fiat/list
+      - /api/currency/crypto/detail
+
+      - /api/chain/list-deposit
+      - /api/chain/list-withdraw
+
+      - /api/game/page
+      - /api/game/detail
+      - /api/game/room/page
+
+      - /api/user/game/order/page-recently-high-prize
+
+      - /api/game/provider/page
+      - /api/game/tag/page
+
+      - /api/notification/verification-code/obtain-email-sign-up
+      - /api/notification/verification-code/obtain-phone-number-sign-up
+
+      - /api/rama/pay-in-callback
+      - /api/rama/pay-out-callback
+      - /api/twitter/auth-callback
+
+    #不进行token拦截正则
+    allowed-pattern: ^/[0-9a-zA-Z\-/]+(?:\.css|\.js|\.gif|\.png|\.eot|\.svg|\.ttf|\.woff|\.xlsx|\.xls)$
+    action-urls:
+      - /api/user/settings/save
+      - /api/user/announcement/read
+
+      - /api/user/gameEasterEggsG1/add
+      - /api/user/gameRecordG1/add
+      - /api/user/item/use
+
+      - /api/user/user-preference/save
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev-local-africa
+  data:
+    redis:
+      database: 6
+      host: 127.0.0.1
+      password: zse45tfv
+logging:
+  level:
+    root: debug
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev-local-hb
+  data:
+    redis:
+      database: 6
+      host: 127.0.0.1
+      password: zse45tfv
+logging:
+  level:
+    root: debug
+---
+spring:
+  config:
+    activate:
+      on-profile: dev-test
+  data:
+    redis:
+      database: 6
+      host: 127.0.0.1
+      password: zse45tfv
+logging:
+  level:
+    root: debug
+---
+spring:
+  config:
+    activate:
+      on-profile: test
+  data:
+    redis:
+      database: 6
+      host: 172.19.0.15
+      password: foobared
+logging:
+  level:
+    root: debug
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod-translate-hb
+  data:
+    redis:
+      database: 6
+      cluster:
+        nodes:
+          - hb-redis-dhefru.serverless.apse1.cache.amazonaws.com:6380
+      username: hb-redis
+      password: Six!@#321_hb_redis
+      ssl:
+        enabled: true
+      lettuce:
+        cluster:
+          refresh:
+            adaptive: true
+            period: 30s
+---
+spring:
+  config:
+    activate:
+      on-profile: prod-translate-africa
+  data:
+    redis:
+      database: 6
+      cluster:
+        nodes:
+          - hb-redis-dhefru.serverless.apse1.cache.amazonaws.com:6380
+      username: hb-redis
+      password: Six!@#321_hb_redis
+      ssl:
+        enabled: true
+      lettuce:
+        cluster:
+          refresh:
+            adaptive: true
+            period: 30s

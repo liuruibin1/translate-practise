@@ -1,0 +1,276 @@
+server:
+  port: 30111
+spring:
+  application:
+    name: %artifactId%
+  profiles:
+    active: %mvn.spring.profile%
+  cloud:
+    nacos:
+      server-addr: %mvn.nacos.server-addr%
+      discovery:
+        server-addr: ${spring.cloud.nacos.server-addr}
+        namespace: %mvn.nacos.namespace%
+        group: %mvn.service.group%
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      minimum-idle: 8
+      maximum-pool-size: 16
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      auto-commit: true
+      pool-name: HikariCP
+      connection-test-query: SELECT 1
+      validation-timeout: 1000
+  data:
+    redis:
+      database: 6
+      timeout: 10000ms
+      lettuce:
+        pool:
+          max-active: 16        # 连接池最大连接数
+          max-idle: 8           # 连接池最大空闲连接数
+          min-idle: 2           # 连接池最小空闲连接数
+          max-wait: 3000ms      # 连接池最大阻塞等待时间
+        shutdown-timeout: 100ms
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      cors:
+        allowed-origins: "*"
+        allowed-methods: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+dubbo:
+  application:
+    id: ${spring.application.name}
+    serialize-check-status: DISABLE
+    auto-trust-serialize-class: true
+    trust-serialize-class-level: 3
+    qos-enable: false
+  protocol:
+    port: 30116
+    name: dubbo
+    payload: 268435456
+  scan:
+    base-packages: com.xxx.**.provider
+  registry:
+    address: nacos://${spring.cloud.nacos.server-addr}
+    group: ${spring.cloud.nacos.discovery.group}
+    timeout: 1200000
+  provider:
+    group: ${spring.cloud.nacos.discovery.group}
+    timeout: 1200000
+  consumer:
+    group: ${spring.cloud.nacos.discovery.group}
+    check: false
+    timeout: 1200000
+    provider-namespace: %mvn.nacos.namespace%
+  config-center:
+    namespace: %mvn.nacos.namespace%
+
+mybatis-plus:
+  mapper-locations: classpath:/mybatis-mapper/**/*Mapper.xml
+
+logging:
+  level:
+    com: warn
+    io: warn
+    reactor: warn
+    org: warn
+
+app:
+  http:
+    proxy:
+      enable: false
+      host: localhost
+      port: 7890
+  user-id-segment-list:
+    - start: 1
+      end: 999999
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev-local-africa
+  datasource:
+    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+    url: jdbc:p6spy:mysql://127.0.0.1:3307/game_africa?autoReconnect=true&failOverReadOnly=false&useUnicode=true&characterEncoding=utf-8
+    username: game_africa_user
+    password: game_africa_user!@#
+  data:
+    redis:
+      database: 6
+      host: 127.0.0.1
+      password: zse45tfv
+logging:
+  level:
+    root: debug
+app:
+  http:
+    proxy:
+      enable: true
+  user-id-segment-list:
+    - start: 2000000
+      end: 2999999
+  # 与 app.pool-contribution-quote-currency-id 要相同
+  vip-level-settlement-currency-id: 1101
+  user-preference:
+    default-base-currency-id: 1
+    default-quote-currency-id: 1
+    default-language: zh-TW
+---
+spring:
+  config:
+    activate:
+      on-profile: dev-local-hb
+  datasource:
+    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+    url: jdbc:p6spy:mysql://127.0.0.1:3307/game_hb?autoReconnect=true&failOverReadOnly=false&useUnicode=true&characterEncoding=utf-8
+    username: game_hb_user
+    password: game_hb_user!@#
+  data:
+    redis:
+      database: 6
+      host: 127.0.0.1
+      password: zse45tfv
+logging:
+  level:
+    root: debug
+app:
+  http:
+    proxy:
+      enable: true
+  user-id-segment-list:
+    - start: 1000000
+      end: 1999999
+  # 与 app.pool-contribution-quote-currency-id 要相同
+  vip-level-settlement-currency-id: 15
+  user-preference:
+    default-base-currency-id: 15
+    default-quote-currency-id: 15
+    default-language: en-IN
+---
+spring:
+  config:
+    activate:
+      on-profile: dev-test
+  datasource:
+    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+    url: jdbc:p6spy:mysql://127.0.0.1:3307/game_hb?autoReconnect=true&failOverReadOnly=false&useUnicode=true&characterEncoding=utf-8
+    username: game_hb_user
+    password: game_hb_user!@#
+  data:
+    redis:
+      database: 6
+      host: 127.0.0.1
+#      password: zse45tfv
+logging:
+  level:
+    root: debug
+app:
+  http:
+    proxy:
+      enable: true
+---
+spring:
+  config:
+    activate:
+      on-profile: test
+  datasource:
+    url: jdbc:mysql://172.19.0.2:3306/six?autoReconnect=true&failOverReadOnly=false&useUnicode=true&characterEncoding=utf-8
+    username: six_user
+    password: n_310987N_fkdnj_e_hBN
+  data:
+    redis:
+      database: 6
+      host: 172.19.0.15
+      password: foobared
+logging:
+  level:
+    root: debug
+app:
+  http:
+    proxy:
+      enable: false
+---
+spring:
+  config:
+    activate:
+      on-profile: prod-translate-hb
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://hb-database.cxs8u8cwcvsy.ap-southeast-1.rds.amazonaws.com:3306/game_hb?useSSL=true&requireSSL=false&verifyServerCertificate=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&connectTimeout=30000&socketTimeout=30000
+    username: game_hb_user
+    password: game_hb_user!@#
+  data:
+    redis:
+      database: 6
+      cluster:
+        nodes:
+          - hb-redis-dhefru.serverless.apse1.cache.amazonaws.com:6380
+      username: hb-redis
+      password: Six!@#321_hb_redis
+      ssl:
+        enabled: true
+      lettuce:
+        cluster:
+          refresh:
+            adaptive: true
+            period: 30s
+app:
+  user-id-segment-list:
+    - start: 1000000
+      end: 1999999
+  # 与 app.pool-contribution-quote-currency-id 要相同
+  vip-level-settlement-currency-id: 15
+  user-preference:
+    default-base-currency-id: 15
+    default-quote-currency-id: 15
+    default-language: en-IN
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod-translate-africa
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://hb-database.cxs8u8cwcvsy.ap-southeast-1.rds.amazonaws.com:3306/game_africa?useSSL=true&requireSSL=false&verifyServerCertificate=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&connectTimeout=30000&socketTimeout=30000
+    username: game_africa_user
+    password: game_africa_user!@#
+  data:
+    redis:
+      database: 6
+      cluster:
+        nodes:
+          - hb-redis-dhefru.serverless.apse1.cache.amazonaws.com:6380
+      username: hb-redis
+      password: Six!@#321_hb_redis
+      ssl:
+        enabled: true
+      lettuce:
+        cluster:
+          refresh:
+            adaptive: true
+            period: 30s
+app:
+  user-id-segment-list:
+    - start: 2000000
+      end: 2999999
+  # 与 app.pool-contribution-quote-currency-id 要相同
+  vip-level-settlement-currency-id: 1101
+  user-preference:
+    default-base-currency-id: 1
+    default-quote-currency-id: 1
+    default-language: zh-TW

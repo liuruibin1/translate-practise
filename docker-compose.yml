@@ -1,0 +1,111 @@
+version: '3.8'
+services:
+  translate-base-service:
+    image: translate-base-service
+    build:
+      context: ./translate-base-service
+      dockerfile: Dockerfile
+    container_name: translate-base-service
+    network_mode: host
+
+  translate-biz-service:
+    image: translate-biz-service
+    build:
+      context: ./translate-biz-service
+      dockerfile: Dockerfile
+    container_name: translate-biz-service
+    network_mode: host
+
+  translate-system-service:
+    image: translate-system-service
+    build:
+      context: ./translate-system-service
+      dockerfile: Dockerfile
+    container_name: translate-system-service
+    network_mode: host
+
+  translate-gateway-server:
+    image: translate-gateway-server
+    build:
+      context: ./translate-gateway-server
+      dockerfile: Dockerfile
+    container_name: translate-gateway-server
+    network_mode: host
+
+  translate-frontend-server:
+    image: translate-frontend-server
+    build:
+      context: ./translate-frontend-server
+      dockerfile: Dockerfile
+    container_name: translate-frontend-server
+    network_mode: host
+    depends_on:
+      translate-base-service:
+        condition: service_started
+      translate-biz-service:
+        condition: service_started
+      translate-system-service:
+        condition: service_started
+
+  translate-frontend-ws:
+    image: translate-frontend-ws
+    build:
+      context: ./translate-frontend-ws
+      dockerfile: Dockerfile
+    container_name: translate-frontend-ws
+    network_mode: host
+    depends_on:
+      translate-base-service:
+        condition: service_started
+      translate-biz-service:
+        condition: service_started
+      translate-system-service:
+        condition: service_started
+      translate-job-executor:
+        condition: service_started
+
+  translate-admin-server:
+    image: translate-admin-server
+    build:
+      context: ./translate-admin-server
+      dockerfile: Dockerfile
+    container_name: translate-admin-server
+    network_mode: host
+    depends_on:
+      translate-base-service:
+        condition: service_started
+      translate-biz-service:
+        condition: service_started
+      translate-system-service:
+        condition: service_started
+
+  translate-job-admin:
+    image: translate-job-admin
+    build:
+      context: ./translate-job-admin
+      dockerfile: Dockerfile
+    container_name: translate-job-admin
+    network_mode: host
+
+  translate-job-executor:
+    image: translate-job-executor
+    build:
+      context: ./translate-job-executor
+      dockerfile: Dockerfile
+    container_name: translate-job-executor
+    network_mode: host
+    depends_on:
+      translate-base-service:
+        condition: service_started
+      translate-biz-service:
+        condition: service_started
+      translate-system-service:
+        condition: service_started
+
+#  translate-spring-boot-admin:
+#    image: translate-spring-boot-admin
+#    build:
+#      context: ./translate-spring-boot-admin
+#      dockerfile: Dockerfile
+#    container_name: translate-spring-boot-admin
+#    network_mode: host

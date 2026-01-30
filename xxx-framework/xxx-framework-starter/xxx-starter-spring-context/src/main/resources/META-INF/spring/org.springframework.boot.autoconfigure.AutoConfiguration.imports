@@ -1,0 +1,2 @@
+com.xxx.framework.spring.utils.SpringUtils
+com.xxx.framework.id.utils.SnowflakeIdUtil
