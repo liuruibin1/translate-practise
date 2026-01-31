@@ -14,7 +14,6 @@
     <modules>
         <module>xxx-starter-spring-context</module>
         <module>xxx-starter-jwt</module>
-        <module>xxx-starter-dubbo-nacos</module>
         <!--<module>xxx-starter-graphql-dgs</module>-->
         <module>xxx-starter-mybatis</module>
         <module>xxx-starter-redis</module>

@@ -20,31 +20,7 @@
 
         <dependency>
             <groupId>com.six</groupId>
-            <artifactId>translate-system-api</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <!--<dependency>
-            <groupId>com.six</groupId>
-            <artifactId>translate-translate-api</artifactId>
-            <version>${project.version}</version>
-        </dependency>-->
-
-        <!--<dependency>
-            <groupId>com.six</groupId>
-            <artifactId>translate-stats-api</artifactId>
-            <version>${project.version}</version>
-        </dependency>-->
-
-        <dependency>
-            <groupId>com.six</groupId>
-            <artifactId>translate-chain-adapter</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.six</groupId>
-            <artifactId>translate-starter-dubbo-nacos</artifactId>
+            <artifactId>translate-starter-jwt</artifactId>
             <version>${project.version}</version>
         </dependency>
 
@@ -115,6 +91,7 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
 
     </dependencies>
 

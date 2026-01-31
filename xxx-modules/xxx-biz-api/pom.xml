@@ -14,11 +14,9 @@
 
         <dependency>
             <groupId>com.six</groupId>
-            <artifactId>translate-common-api</artifactId>
+            <artifactId>translate-core</artifactId>
             <version>${project.version}</version>
-            <optional>true</optional>
         </dependency>
-
         <!-- 第三方 -->
 
         <dependency>
@@ -32,6 +30,11 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+        </dependency>
+
 
     </dependencies>
 

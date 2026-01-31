@@ -42,89 +42,9 @@
     <profiles>
 
         <profile>
-            <id>admin</id>
+            <id>translate</id>
             <properties>
-                <model.name>admin</model.name>
-                <mybatis.generator.configurationFile>src/main/resources/${model.name}.xml</mybatis.generator.configurationFile>
-            </properties>
-        </profile>
-
-        <profile>
-            <id>chain</id>
-            <properties>
-                <model.name>chain</model.name>
-                <mybatis.generator.configurationFile>src/main/resources/${model.name}.xml</mybatis.generator.configurationFile>
-            </properties>
-        </profile>
-
-        <profile>
-            <id>country</id>
-            <properties>
-                <model.name>country</model.name>
-                <mybatis.generator.configurationFile>src/main/resources/${model.name}.xml</mybatis.generator.configurationFile>
-            </properties>
-        </profile>
-
-        <profile>
-            <id>currency</id>
-            <properties>
-                <model.name>currency</model.name>
-                <mybatis.generator.configurationFile>src/main/resources/${model.name}.xml</mybatis.generator.configurationFile>
-            </properties>
-        </profile>
-
-        <profile>
-            <id>game</id>
-            <properties>
-                <model.name>game</model.name>
-                <mybatis.generator.configurationFile>src/main/resources/${model.name}.xml</mybatis.generator.configurationFile>
-            </properties>
-        </profile>
-
-        <profile>
-            <id>rollover</id>
-            <properties>
-                <model.name>rollover</model.name>
-                <mybatis.generator.configurationFile>src/main/resources/${model.name}.xml</mybatis.generator.configurationFile>
-            </properties>
-        </profile>
-
-        <profile>
-            <id>notification</id>
-            <properties>
-                <model.name>notification</model.name>
-                <mybatis.generator.configurationFile>src/main/resources/${model.name}.xml</mybatis.generator.configurationFile>
-            </properties>
-        </profile>
-
-        <profile>
-            <id>stats</id>
-            <properties>
-                <model.name>stats</model.name>
-                <mybatis.generator.configurationFile>src/main/resources/${model.name}.xml</mybatis.generator.configurationFile>
-            </properties>
-        </profile>
-
-        <profile>
-            <id>system</id>
-            <properties>
-                <model.name>system</model.name>
-                <mybatis.generator.configurationFile>src/main/resources/${model.name}.xml</mybatis.generator.configurationFile>
-            </properties>
-        </profile>
-
-        <profile>
-            <id>task</id>
-            <properties>
-                <model.name>task</model.name>
-                <mybatis.generator.configurationFile>src/main/resources/${model.name}.xml</mybatis.generator.configurationFile>
-            </properties>
-        </profile>
-
-        <profile>
-            <id>user</id>
-            <properties>
-                <model.name>user</model.name>
+                <model.name>translate</model.name>
                 <mybatis.generator.configurationFile>src/main/resources/${model.name}.xml</mybatis.generator.configurationFile>
             </properties>
         </profile>

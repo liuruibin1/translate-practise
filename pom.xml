@@ -8,18 +8,13 @@
     <modules>
         <module>xxx-framework</module>
         <module>xxx-generator</module>
-        <module>xxx-starter</module>
         <module>xxx-modules</module>
-        <module>xxx-server</module>
     </modules>
 
     <properties>
         <mvn.spring.profile>dev-local-hb</mvn.spring.profile>
         <!--        <mvn.spring.profile>dev-local-africa</mvn.spring.profile>-->
         <!--        <mvn.spring.profile>dev-test</mvn.spring.profile>-->
-        <mvn.nacos.server-addr>localhost:8848</mvn.nacos.server-addr>
-        <mvn.nacos.namespace>translate-namespace-dev</mvn.nacos.namespace>
-        <mvn.service.group>translate-group-dev</mvn.service.group>
         <mvn.project.version>translate-1.2.1-SNAPSHOT</mvn.project.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -34,8 +29,6 @@
 
         <!--        <spring.version>6.2.1</spring.version>-->
         <spring-boot.version>3.4.1</spring-boot.version>
-        <spring-cloud.version>2024.0.0</spring-cloud.version>
-        <spring-cloud-alibaba.version>2023.0.3.2</spring-cloud-alibaba.version>
         <spring-boot-admin.version>3.4.5</spring-boot-admin.version>
 
         <jakarta.servlet-api.version>6.1.0</jakarta.servlet-api.version>
@@ -76,8 +69,8 @@
         <okhttp.version>4.9.1</okhttp.version>
         <javafaker.version>1.0.2</javafaker.version>
         <lombok.version>1.18.36</lombok.version>
-
-        <easyexcel.version>4.0.3</easyexcel.version>
+        <fastjson2.version>2.0.43</fastjson2.version>
+        <jackson.version>2.19.2</jackson.version>
 
     </properties>
 
@@ -103,11 +96,6 @@
     <dependencyManagement>
         <dependencies>
 
-            <dependency>
-                <groupId>com.six</groupId>
-                <artifactId>translate-job-core</artifactId>
-                <version>${project.version}</version>
-            </dependency>
 
             <!-- 第三方 -->
 
@@ -119,21 +107,6 @@
                 <scope>import</scope>
             </dependency>
 
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring-cloud.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-
-            <dependency>
-                <groupId>com.alibaba.cloud</groupId>
-                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
-                <version>${spring-cloud-alibaba.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
 
             <dependency>
                 <groupId>de.codecentric</groupId>
@@ -151,13 +124,6 @@
                 <scope>import</scope>
             </dependency>
 
-            <dependency>
-                <groupId>org.apache.dubbo</groupId>
-                <artifactId>dubbo-dependencies-bom</artifactId>
-                <version>${dubbo.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
 
             <dependency>
                 <groupId>org.springdoc</groupId>
@@ -173,29 +139,6 @@
                 <version>${jakarta.servlet-api.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>org.apache.dubbo</groupId>
-                <artifactId>dubbo-spring-boot-starter</artifactId>
-                <version>${dubbo.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.apache.dubbo</groupId>
-                <artifactId>dubbo-registry-nacos</artifactId>
-                <version>${dubbo.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.apache.dubbo</groupId>
-                <artifactId>dubbo</artifactId>
-                <version>${dubbo.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.alibaba.nacos</groupId>
-                <artifactId>nacos-spring-context</artifactId>
-                <version>${nacos-spring-context.version}</version>
-            </dependency>
 
             <dependency>
                 <groupId>org.redisson</groupId>
@@ -308,49 +251,19 @@
             </dependency>
 
             <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>easyexcel</artifactId>
-                <version>${easyexcel.version}</version>
+                <groupId>com.alibaba.fastjson2</groupId>
+                <artifactId>fastjson2</artifactId>
+                <version>${fastjson2.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>easyexcel-core</artifactId>
-                <version>${easyexcel.version}</version>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${jackson.version}</version>
             </dependency>
 
         </dependencies>
     </dependencyManagement>
-
-    <profiles>
-        <profile>
-            <id>test</id>
-            <properties>
-                <mvn.spring.profile>test</mvn.spring.profile>
-                <mvn.nacos.server-addr>172.19.0.12:8848</mvn.nacos.server-addr>
-                <mvn.nacos.namespace>namespace-translate-test</mvn.nacos.namespace>
-                <mvn.service.group>group-translate-test</mvn.service.group>
-            </properties>
-        </profile>
-        <profile>
-            <id>prod-translate-hb</id>
-            <properties>
-                <mvn.spring.profile>prod-translate-hb</mvn.spring.profile>
-                <mvn.nacos.server-addr>172.31.16.70:8848,172.31.23.151:8848</mvn.nacos.server-addr>
-                <mvn.nacos.namespace>namespace-prod-translate-hb</mvn.nacos.namespace>
-                <mvn.service.group>group-prod-translate-hb</mvn.service.group>
-            </properties>
-        </profile>
-        <profile>
-            <id>prod-translate-africa</id>
-            <properties>
-                <mvn.spring.profile>prod-translate-africa</mvn.spring.profile>
-                <mvn.nacos.server-addr>172.31.31.39:8848</mvn.nacos.server-addr>
-                <mvn.nacos.namespace>namespace-prod-translate-africa</mvn.nacos.namespace>
-                <mvn.service.group>group-prod-translate-africa</mvn.service.group>
-            </properties>
-        </profile>
-    </profiles>
 
     <build>
 

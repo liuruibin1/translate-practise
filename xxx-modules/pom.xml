@@ -10,15 +10,8 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>xxx-common-api</module>
-
         <module>xxx-biz-api</module>
-        <module>xxx-system-api</module>
-
-        <module>xxx-chain-adapter</module>
-
         <module>xxx-biz-service</module>
-        <module>xxx-system-service</module>
     </modules>
 
 </project>
