@@ -1,16 +1,16 @@
 package com.xxx.response;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Data;
-
 import java.io.Serializable;
-import java.math.BigDecimal;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UserDetail implements Serializable {
 
-    //实体字段
+    // 实体字段
     private Long id;
 
     private Integer type2;

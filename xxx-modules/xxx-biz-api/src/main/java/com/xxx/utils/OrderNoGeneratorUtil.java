@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
-
 public class OrderNoGeneratorUtil {
     /**
      * 生成INDIA前缀的唯一订单号
@@ -27,7 +26,7 @@ public class OrderNoGeneratorUtil {
         Random random = new Random();
         long randomNum = Math.abs(random.nextLong() % 100000000L); // 8位随机数
 
-        return String.format("%s%s%03d%06d%08d", prefix,timestamp, millis, nanos, randomNum);
+        return String.format("%s%s%03d%06d%08d", prefix, timestamp, millis, nanos, randomNum);
     }
 
     public static void main(String[] args) {

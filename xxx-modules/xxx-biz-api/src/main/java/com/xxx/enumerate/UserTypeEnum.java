@@ -7,7 +7,7 @@ public enum UserTypeEnum {
 
     MERCHANT(1, "商户"),
     USER(2, "用户"),
-    //AFFILIATE(11, "商户分身"),
+    // AFFILIATE(11, "商户分身"),
     ;
 
     private final Integer type;

@@ -1,15 +1,16 @@
 package com.xxx.translate.provider;
 
+import java.io.Serializable;
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xxx.common.core.base.vo.Response;
 import com.xxx.entity.User;
 import com.xxx.translate.service.UserService;
 import com.xxx.translate.vo.UserVO;
-import org.springframework.stereotype.Service;
-
-import java.io.Serializable;
-import java.util.List;
 
 @Service
 public class UserProvider implements IUserProvider {

@@ -5,6 +5,8 @@
     <properties resource="datasource.properties"/>
     <context id="translate" targetRuntime="MyBatis3" defaultModelType="flat">
 
+        <property name="nullCatalogMeansCurrent" value="true"/>
+
         <property name="javaFileEncoding" value="UTF-8"/>
 
         <!-- 配置高级扩展插件 -->
@@ -42,7 +44,7 @@
                         password="${mvn.jdbc.password}"/>
         <javaModelGenerator targetPackage="com.xxx.entity" targetProject="../xxx-modules/xxx-biz-api/src/main/java"/>
 
-        <table tableName="user" domainObjectName="User">
+        <table catalog="translate" tableName="user" domainObjectName="User">
             <property name="sensitiveFields" value="password"/>
         </table>
 

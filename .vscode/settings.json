@@ -1,0 +1,12 @@
+{
+  "java.format.settings.profile": "OneLineStyle",
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "redhat.java",
+
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit",
+    "source.organizeImports": "explicit"
+  },
+
+  "java.saveActions.organizeImports": true
+}
